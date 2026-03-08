@@ -1,0 +1,11 @@
+@(
+venv/
+.env
+__pycache__/
+*.pyc
+data/*.csv
+data/*.parquet
+models/*.joblib
+models/*.h5
+.ipynb_checkpoints/
+)
