@@ -1,0 +1,10 @@
+2026-03-08 17:25:11,158 - INFO - Fetched 10 news items for AAPL
+2026-03-08 17:25:11,476 - INFO - Fetched 10 news items for MSFT
+2026-03-08 17:25:11,477 - INFO - Processed 1 unique news items
+2026-03-08 17:25:11,481 - INFO - Saved news to data/news\news_2026-03-08.csv
+2026-03-08 17:25:11,495 - INFO - Saved sentiment aggregation to data/features/sentiment\sentiment_2026-03-08.csv
+2026-03-08 17:25:36,056 - INFO - Fetched 10 news items for AAPL
+2026-03-08 17:25:36,268 - INFO - Fetched 10 news items for MSFT
+2026-03-08 17:25:36,271 - INFO - Processed 17 unique news items
+2026-03-08 17:25:36,275 - INFO - Saved news to data/news\news_2026-03-08.csv
+2026-03-08 17:25:36,285 - INFO - Saved sentiment aggregation to data/features/sentiment\sentiment_2026-03-08.csv

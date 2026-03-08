@@ -1,0 +1,2 @@
+ticker,headline,source,published_at,url,sentiment_score
+AAPL,Test headline,Reuters,1640995200,http://example.com,0.5

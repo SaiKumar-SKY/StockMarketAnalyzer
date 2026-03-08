@@ -154,6 +154,46 @@ python src/intraday_fetcher.py --tickers GOOGL AMZN --mode manual
 
 This will fetch the latest 15-minute data for GOOGL and AMZN and append to their CSV files.
 
+## News Headline Fetching
+
+The project includes a news fetcher to collect financial news headlines for sentiment analysis.
+
+### Usage
+
+To fetch news headlines and compute sentiment:
+
+```bash
+python src/news_fetcher.py --tickers AAPL MSFT GOOGL
+```
+
+### Options
+
+- `--tickers`: List of stock tickers (required)
+- `--date`: Target date in YYYY-MM-DD format (default: today)
+
+### Features
+
+- Fetches recent news headlines using yfinance (free, no API key required)
+- Performs VADER sentiment analysis on each headline (compound score -1 to +1)
+- De-duplicates headlines by URL hash
+- Saves detailed news data to `/data/news/news_{date}.csv`
+- Aggregates daily average sentiment per ticker to `/data/features/sentiment/sentiment_{date}.csv`
+- Handles tickers with no news gracefully (outputs NaN for sentiment)
+
+### Output Format
+
+News CSV columns: `ticker`, `headline`, `source`, `published_at`, `url`, `sentiment_score`
+
+Sentiment CSV columns: `ticker`, `sentiment` (average compound score)
+
+### Example
+
+```bash
+python src/news_fetcher.py --tickers TSLA NVDA --date 2026-03-08
+```
+
+This will fetch news for TSLA and NVDA, analyze sentiment, and save to dated CSV files.
+
 The project includes a fully local interactive notebook environment. Follow these steps after activating the virtual environment:
 
 1. Ensure dependencies are installed (the `requirements.txt` now contains Jupyter-related packages):

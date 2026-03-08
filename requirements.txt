@@ -13,6 +13,9 @@ apscheduler
 pytz
 holidays
 
+# NLP
+nltk
+
 # development & notebooks
 jupyterlab
 ipykernel
