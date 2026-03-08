@@ -7,3 +7,13 @@ matplotlib
 plotly
 streamlit
 joblib
+
+# development & notebooks
+jupyterlab
+ipykernel
+nbconvert
+ipywidgets
+nbstripout
+jupyterlab-git
+jupyter-resource-usage
+jupyterlab-lsp

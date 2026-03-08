@@ -79,3 +79,56 @@ Repeat steps 1-4 on any machine to get the exact same environment.
 ## Usage
 
 Once set up, you can start building your stock analysis pipeline using the installed libraries.
+
+## JupyterLab Local Environment
+
+The project includes a fully local interactive notebook environment. Follow these steps after activating the virtual environment:
+
+1. Ensure dependencies are installed (the `requirements.txt` now contains Jupyter-related packages):
+   ```bash
+   pip install -r requirements.txt
+   ```
+2. Launch JupyterLab:
+   ```bash
+   jupyter lab
+   ```
+   A browser window should open showing the interface. All notebooks in `/notebooks/` will be accessible.
+3. The kernel used by notebooks will correspond to the project's virtual environment; you can verify by running the following in a cell:
+   ```python
+   import sys
+   print(sys.executable)
+   ```
+   It should point to `.../venv/...`.
+4. A sample exploratory notebook (`/notebooks/01_data_exploration.ipynb`) is included; it loads stock data and renders interactive Plotly charts. Open it to confirm everything works.
+
+### Kernel & Hardware Upgrades
+
+If you later acquire a remote machine or GPU, you can connect to a remote kernel from JupyterLab. Install `jupyter-client` on the remote host and start a kernel there, then follow [Jupyter documentation](https://jupyter.readthedocs.io/) to configure `jupyter_client.connect` file or use `ssh -L` tunneling. This allows you to run heavy computations on external hardware while editing locally.
+
+### Notebook Version Control
+
+All notebooks live under `/notebooks/` and are tracked by Git. The pre-commit configuration includes `nbstripout`, which automatically strips output from notebooks before commits to keep the repository clean. To enable it manually, run:
+
+```bash
+nbstripout --install
+```
+
+Outputs will be removed each time you commit changes to `.ipynb` files.
+
+### Extensions
+
+The following JupyterLab extensions are installed in the environment:
+- `jupyterlab-git` for repository integration
+- `jupyter-resource-usage` to display local RAM/CPU usage
+- `jupyterlab-lsp` for language server support
+
+You can install additional extensions via `pip` and enable them with `jupyter labextension install` if needed.
+
+### Checking GPU Availability
+
+Notebooks include a small cell that will report whether a local CUDA-capable GPU is detected. This is informational and does not change any configuration. Example code:
+
+```python
+import torch
+print('CUDA available:', torch.cuda.is_available())
+```
