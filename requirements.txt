@@ -8,6 +8,10 @@ plotly
 streamlit
 joblib
 
+# database
+pymongo
+pydantic
+
 # scheduling
 apscheduler
 pytz

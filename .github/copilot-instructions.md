@@ -1,33 +1,81 @@
 <!-- Use this file to provide workspace-specific custom instructions to Copilot. For more details, visit https://code.visualstudio.com/docs/copilot/copilot-customization#_use-a-githubcopilotinstructionsmd-file -->
-- [ ] Verify that the copilot-instructions.md file in the .github directory is created.
+- [x] Verify that the copilot-instructions.md file in the .github directory is created.
 
-- [ ] Clarify Project Requirements
-	<!-- Ask for project type, language, and frameworks if not specified. Skip if already provided. -->
+- [x] Clarify Project Requirements
+	<!-- Stock market analysis with MongoDB persistence, sentiment analysis, intraday data, technical indicators -->
 
 - [x] Scaffold the Project
-	<!-- Created requirements.txt, smoke_test.py, README.md -->
+	<!-- Created requirements.txt, smoke_test.py, README.md with complete setup guide -->
 
 - [x] Customize the Project
-	<!-- Added specific requirements and files as per user request -->
+	<!-- Added MongoDB models, database operations, news fetcher, intraday fetcher, VADER sentiment, technical indicators -->
 
 - [x] Install Required Extensions
 	<!-- No extensions required for Python project -->
 
 - [x] Compile the Project
-	<!-- Installed all dependencies without errors -->
+	<!-- Installed all dependencies: pymongo, pydantic, yfinance, nltk, apscheduler -->
 
 - [x] Create and Run Task
-	<!-- No task needed for this Python project -->
+	<!-- Created init_db.py for MongoDB initialization, smoke_test.py for verification -->
 
 - [x] Launch the Project
-	<!-- Smoke test run successfully -->
+	<!-- Smoke test and all 35 unit tests pass successfully -->
 
-- [ ] Ensure Documentation is Complete
-	<!--
-	Verify that all previous steps have been completed.
-	Vex] Ensure Documentation is Complete
-	<!-- README.md exists and documents setup steps# Execution Guidelines
-PROGRESS TRACKING:
+- [x] Ensure Documentation is Complete
+	<!-- README.md fully documents setup, MongoDB architecture, database operations, and usage examples -->
+
+- [x] Implement Technical Indicators
+	<!-- Added indicator computation module, unit tests, parquet output, modular design -->
+
+# Project Summary
+
+## Technology Stack
+- **Database**: MongoDB (local instance at localhost:27017)
+- **ORM/Validation**: Pydantic models for all collections
+- **Data Sources**: yfinance (free, no rate limits)
+- **NLP**: VADER sentiment analysis via NLTK
+- **Scheduling**: APScheduler for market hours jobs
+- **Python**: 3.11+ with virtual environment (venv)
+
+## Collections (MongoDB)
+1. `prices` - Daily OHLCV (unique: ticker+date)
+2. `intraday` - 15-min data (unique: ticker+timestamp)
+3. `news` - Headlines+sentiment (unique: url)
+4. `features_sentiment` - Daily aggregates (unique: ticker+date)
+5. `predictions` - Model outputs (unique: ticker+date+model_name)
+
+## Key Modules
+- `src/database.py` - Pydantic models + collection initialization
+- `src/db_operations.py` - Upsert/query functions (idempotent)
+- `src/data_fetcher.py` - Historical price fetching
+- `src/intraday_fetcher.py` - 15-min price data
+- `src/news_fetcher.py` - Headlines + VADER sentiment
+- `src/indicators.py` - Technical analysis indicators computation
+- `scripts/init_db.py` - MongoDB setup with indexes
+- `scripts/compute_indicators.py` - Indicator computation script
+- `scripts/load_data.py` - Load parquet data into MongoDB
+
+## Test Coverage
+- 35 unit tests (all passing)
+- Database operations (upsert + query patterns)
+- Data validation (fetchers)
+- News processing & sentiment analysis
+- Market hours detection for intraday jobs
+- Technical indicators computation and validation
+
+## Performance Targets
+- Sub-500ms queries on indexed fields (ticker, date)
+- Atomic upserts prevent duplicates
+- Unique constraints enforce data integrity
+
+## Next Steps (Future)
+- Integrate fetchers with database layer
+- Create backup script with timestamp
+- Alembic migrations if needed
+- Dashboard with Streamlit for visualization
+- ML model predictions to `predictions` collection
+
 - If any tools are available to manage the above todo list, use it to track progress through this checklist.
 ## Execution Guidelines
 PROGRESS TRACKING:
