@@ -8,6 +8,11 @@ plotly
 streamlit
 joblib
 
+# scheduling
+apscheduler
+pytz
+holidays
+
 # development & notebooks
 jupyterlab
 ipykernel

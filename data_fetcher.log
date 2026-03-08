@@ -1,0 +1,13 @@
+2026-03-08 17:07:11,603 - INFO - Fetching data for AAPL from 2025-03-08 to 2026-03-08
+2026-03-08 17:07:12,376 - ERROR - Missing columns for AAPL: {'Low', 'Close', 'Volume', 'Open', 'High'}
+2026-03-08 17:07:12,376 - ERROR - Validation failed for AAPL
+2026-03-08 17:07:12,376 - INFO - Fetching data for MSFT from 2025-03-08 to 2026-03-08
+2026-03-08 17:07:12,769 - ERROR - Missing columns for MSFT: {'Low', 'Close', 'Volume', 'Open', 'High'}
+2026-03-08 17:07:12,769 - ERROR - Validation failed for MSFT
+2026-03-08 17:07:24,162 - INFO - Fetching data for AAPL from 2025-03-08 to 2026-03-08
+2026-03-08 17:07:24,917 - ERROR - Missing columns for AAPL: {'Low', 'Close', 'Open', 'High', 'Volume'}
+2026-03-08 17:07:24,917 - ERROR - Validation failed for AAPL
+2026-03-08 17:07:31,210 - INFO - Fetching data for AAPL from 2025-03-08 to 2026-03-08
+2026-03-08 17:07:32,031 - INFO - Data validation passed for AAPL
+2026-03-08 17:07:32,057 - INFO - Saved data for AAPL to data/raw\aapl\AAPL_ohlcv.parquet
+2026-03-08 17:07:32,057 - INFO - Successfully processed AAPL

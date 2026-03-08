@@ -72,15 +72,87 @@ When done working, deactivate the virtual environment:
 deactivate
 ```
 
-### Reproducing on Another Machine
+## Data Fetching
 
-Repeat steps 1-4 on any machine to get the exact same environment.
+The project includes a data fetcher script to download historical OHLCV stock data.
 
-## Usage
+### Usage
 
-Once set up, you can start building your stock analysis pipeline using the installed libraries.
+Activate the virtual environment and run:
 
-## JupyterLab Local Environment
+```bash
+python src/data_fetcher.py --tickers AAPL MSFT GOOGL --start -5y
+```
+
+### Options
+
+- `--tickers`: List of stock tickers (required)
+- `--start`: Start date (YYYY-MM-DD or relative like -5y, -6m, -30d) (default: -5y)
+- `--end`: End date (YYYY-MM-DD) (default: today)
+
+### Features
+
+- Fetches data using yfinance (free, no rate limits)
+- Validates data integrity (no missing columns, numeric types, date index)
+- Saves to Parquet format under `/data/raw/{ticker}/`
+- Includes retry logic with exponential backoff for network issues
+- Logs all operations to `data_fetcher.log`
+
+### Example
+
+```bash
+python src/data_fetcher.py --tickers TSLA NVDA --start 2020-01-01 --end 2023-12-31
+```
+
+This will download 4 years of data for TSLA and NVDA, validate it, and save to partitioned Parquet files.
+
+## Intraday Data Fetching
+
+The project includes a scheduled intraday data fetcher for real-time stock prices during market hours.
+
+### Usage
+
+To run the scheduler manually for testing:
+
+```bash
+python src/intraday_fetcher.py --tickers AAPL MSFT --mode manual
+```
+
+To start the background scheduler:
+
+```bash
+python src/intraday_fetcher.py --tickers AAPL MSFT
+```
+
+### Options
+
+- `--tickers`: List of stock tickers (required)
+- `--mode`: 'scheduled' (default) or 'manual' for one-time fetch
+
+### Features
+
+- Fetches 15-minute interval data during market hours (9:30 AM - 4:00 PM EST)
+- Respects US market holidays and weekends
+- Appends new data to CSV files under `/data/realtime/{ticker}/` without duplicates
+- Uses APScheduler for reliable background scheduling
+- Includes rate limiting and API error handling
+- Logs all operations to `intraday_fetcher.log`
+
+### Scheduled Mode
+
+In scheduled mode, the script runs continuously and fetches data every 15 minutes during market hours. It automatically stops outside market hours and resumes the next trading day.
+
+### Manual Mode
+
+In manual mode, performs one fetch operation regardless of market hours, useful for testing or backfilling.
+
+### Example
+
+```bash
+python src/intraday_fetcher.py --tickers GOOGL AMZN --mode manual
+```
+
+This will fetch the latest 15-minute data for GOOGL and AMZN and append to their CSV files.
 
 The project includes a fully local interactive notebook environment. Follow these steps after activating the virtual environment:
 
